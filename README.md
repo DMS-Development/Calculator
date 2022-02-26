@@ -1,1 +1,2 @@
-# Calculator
+# Welcome To Calculator!
+For this project I'm going to be creating a calculator web-app from scratch. The goal for this lesson is to really hone in javascript skills and work on designing things with CSS.
