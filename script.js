@@ -1,9 +1,10 @@
-const display = document.querySelector('.display');
+const backButton = document.querySelector('#delete');
 const currentValue = document.querySelector('.currentValue');
 const previousValue = document.querySelector('.previousValue');
 const numberButtons = document.querySelectorAll('.number');
 const plusMinus = document.querySelector('.positiveNegative');
 const decimal = document.querySelector('.decimal');
+const percent = document.querySelector('.percentage')
 const operatorButtons = document.querySelectorAll('.operator');
 const equalsButton = document.querySelector('.equals');
 const allClear = document.querySelector('.allClear');
@@ -11,6 +12,7 @@ let beenEquated = 0;
 let operator;
 let firstNumber;
 let secondNumber;
+let toPercent;
 let equated;
 let equatedRounded;
 const addition = (firstNumber, secondNumber) => sum = Number(firstNumber) + Number(secondNumber);
@@ -28,8 +30,19 @@ const operate = (firstNumber, operator, secondNumber) => {
         return divide(firstNumber, secondNumber);
     }
 };
+const percentOperate = (firstNumber, operator, toPercent) => {
+    if (operator === '+') {
+        return (firstNumber * toPercent) + firstNumber;
+    } else if (operator === '-') {
+        return (firstNumber * toPercent) - firstNumber;
+    } else if (operator === '*') {
+        return (firstNumber * toPercent) * firstNumber;
+    } else if (operator === '/') {
+        return (firstNumber * toPercent) / firstNumber;
+    }
+}
 
-numberButtons.forEach(button => button.addEventListener('click', () => {
+numberButtons.forEach(button => button.addEventListener('click', (numberPressed) => {
     if (beenEquated === 1) {
         firstNumber = equatedRounded;
         previousValue.textContent = firstNumber;
@@ -39,7 +52,7 @@ numberButtons.forEach(button => button.addEventListener('click', () => {
     currentValue.textContent += button.textContent;
 }))
 
-operatorButtons.forEach(button => button.addEventListener('click', () => {
+operatorButtons.forEach(button => button.addEventListener('click', (operatorPressed) => {
     if (beenEquated === 1) {
         firstNumber = equatedRounded;
         operator = button.textContent;
@@ -63,7 +76,7 @@ operatorButtons.forEach(button => button.addEventListener('click', () => {
     }
 }))
 
-equalsButton.addEventListener('click', () => {
+equalsButton.addEventListener('click', (equalsPressed) => {
     secondNumber = Number(currentValue.textContent);
     previousValue.textContent = `${firstNumber} ${operator} ${secondNumber}`;
     currentValue.textContent = '';
@@ -72,7 +85,24 @@ equalsButton.addEventListener('click', () => {
     currentValue.textContent = equatedRounded;
     beenEquated = 1;
 })
-decimal.addEventListener('click', () => {
+
+backButton.addEventListener('click', (deletePressed) => {
+    currentValue.textContent = currentValue.textContent.slice(0, -1);
+})
+
+percent.addEventListener('click', (percentagePressed) => {
+    if (firstNumber && operator) {
+        toPercent = Number(currentValue.textContent) / 100;
+        previousValue.textContent = `${firstNumber} ${operator} ${toPercent}`
+        currentValue.textContent = percentOperate(firstNumber, operator, toPercent);
+    }
+    //toPercent = Number(currentValue.textContent) / 100;
+    //previousValue.textContent = currentValue.textContent;
+    //currentValue.textContent = `${toPercent}`;
+
+})
+
+decimal.addEventListener('click', (decimalPressed) => {
     if (currentValue.textContent.includes('.')) {
         return currentValue.textContent;
     } else {
@@ -80,11 +110,11 @@ decimal.addEventListener('click', () => {
     }
 })
 
-plusMinus.addEventListener('click', () => {
+plusMinus.addEventListener('click', (plusMinusPressed) => {
    currentValue.textContent = (0 - Number(currentValue.textContent));
 })
 
-allClear.addEventListener('click', () => {
+allClear.addEventListener('click', (allClearPressed) => {
     firstNumber = null;
     secondNumber = null;
     beenEquated = 0;

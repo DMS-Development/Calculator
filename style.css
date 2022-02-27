@@ -43,10 +43,39 @@ body {
     height: 100%;
     border-radius: 27px;
     border: 2px solid whitesmoke;
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    justify-content: flex-end;
+    display: flex;
+    flex-direction: row;
     align-items: center;
+}
+
+.left {
+    background-color: #aab1a6;
+    border-radius: 30px;
+    margin-bottom: 19%;
+    margin-left: 1%;
+    width: 25%;
+    border: 2px solid whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.right {
+    margin-left: auto;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+#delete {
+    font-family: monospace;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.left:hover {
+    transform: scale(1.03);
 }
 
 .currentValue {
