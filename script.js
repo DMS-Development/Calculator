@@ -96,10 +96,6 @@ percent.addEventListener('click', (percentagePressed) => {
         previousValue.textContent = `${firstNumber} ${operator} ${toPercent}`
         currentValue.textContent = percentOperate(firstNumber, operator, toPercent);
     }
-    //toPercent = Number(currentValue.textContent) / 100;
-    //previousValue.textContent = currentValue.textContent;
-    //currentValue.textContent = `${toPercent}`;
-
 })
 
 decimal.addEventListener('click', (decimalPressed) => {
@@ -123,3 +119,4 @@ allClear.addEventListener('click', (allClearPressed) => {
     currentValue.textContent = '';
 
 })
+  
