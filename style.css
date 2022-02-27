@@ -43,12 +43,23 @@ body {
     height: 100%;
     border-radius: 27px;
     border: 2px solid whitesmoke;
-    display: flex;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
     justify-content: flex-end;
-    align-items: flex-end;
+    align-items: center;
+}
+
+.currentValue {
     font-family: monospace;
     font-size: 4em;
     text-align: right;
+}
+
+.previousValue {
+    font-family: monospace;
+    font-size: 2em;
+    text-align: right;
+    color: grey;
 }
 
 .buttonsContainer {
@@ -100,4 +111,8 @@ body {
     background-color: #2F3E46;
     grid-column-start: 3;
     grid-column-end: span 2;
+}
+
+.bottomRow.decimal {
+    background-color: #85A98C;
 }
